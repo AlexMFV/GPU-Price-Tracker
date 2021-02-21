@@ -1,0 +1,23 @@
+﻿<Window x:Class="NETCore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NETCore"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid Background="{StaticResource DarkBackground}">
+        <DataGrid x:Name="lstListings" Background="{StaticResource LightGray}" AlternatingRowBackground="{StaticResource darkRow}" RowBackground="{StaticResource lightRow}" IsReadOnly="true" Margin="10,50,10,10" ItemsSource="{Binding IsAsync=True}" AutoGenerateColumns="False" FontFamily="Trebuchet MS" Foreground="White" FontSize="16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Country" Binding="{Binding country}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Website" Binding="{Binding url}"></DataGridTextColumn>
+                <DataGridTextColumn Header="GPU Name" Binding="{Binding gpuName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Price" Binding="{Binding price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Availability" Binding="{Binding availability}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="35" Width="88" Click="btnAdd_Click"/>
+        <Button x:Name="btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="103,10,0,0" VerticalAlignment="Top" Height="35" Width="88" Click="btnRemove_Click"/>
+    </Grid>
+</Window>
