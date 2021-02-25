@@ -23,7 +23,7 @@ namespace NETCore
     /// </summary>
     public partial class MainWindow : Window
     {
-        BindingList<GPU> gpuCollection = new BindingList<GPU>();        
+        ObservableCollection<GPU> gpuCollection = new ObservableCollection<GPU>();
 
         public MainWindow()
         {
@@ -32,22 +32,7 @@ namespace NETCore
             tim.Elapsed += T_Elapsed;
 
             tim.Start();
-            lstListings.DataContext = gpuCollection;
-            gpuCollection.AllowEdit = true;
-            gpuCollection.AddingNew += GpuCollection_AddingNew;
-            gpuCollection.ListChanged += GpuCollection_ListChanged;
-        }
-
-        private void GpuCollection_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            lstListings.DataContext = null;
-            lstListings.DataContext = gpuCollection;
-        }
-
-        private void GpuCollection_AddingNew(object sender, AddingNewEventArgs e)
-        {
-            lstListings.DataContext = null;
-            lstListings.DataContext = gpuCollection;
+            lstListings.ItemsSource = gpuCollection;
         }
 
         private void T_Elapsed(object sender, ElapsedEventArgs e)
@@ -58,6 +43,8 @@ namespace NETCore
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             gpuCollection.Add(new GPU("www.google.pt", "GTX 1080Ti", "349€", "Out of Stock"));
+            gpuCollection.Add(new GPU("https://github.com/Fody/Fody", "GTX 1080Ti", "349€", "Out of Stock"));
+
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
@@ -71,10 +58,20 @@ namespace NETCore
             Random r;
             for (int i = 0; i < gpuCollection.Count; i++)
             {
-                r = new Random(DateTime.Now.Millisecond);
+                r = new Random();
                 int value = r.Next();
                 gpuCollection[i].price = Convert.ToString(value) + "€";
+
+                Random t = new Random();
+                int newValue = t.Next(0, 2);
+                gpuCollection[i].availability = newValue == 0 ? "Out Of Stock" : "In Stock";
             }
+        }
+
+        private void lstListings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", !((GPU)lstListings.SelectedItem).url.Contains("http") ?
+                ("https://" + ((GPU)lstListings.SelectedItem).url) : ((GPU)lstListings.SelectedItem).url);
         }
     }
 }

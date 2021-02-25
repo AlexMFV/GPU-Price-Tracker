@@ -1,11 +1,15 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NETCore
 {
+    [AddINotifyPropertyChangedInterface]
     public class GPU
     {
         public string url { get; set; }

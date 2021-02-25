@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid Background="{StaticResource DarkBackground}">
-        <DataGrid x:Name="lstListings" Background="{StaticResource LightGray}" AlternatingRowBackground="{StaticResource darkRow}" RowBackground="{StaticResource lightRow}" IsReadOnly="true" Margin="10,50,10,10" ItemsSource="{Binding IsAsync=True}" AutoGenerateColumns="False" FontFamily="Trebuchet MS" Foreground="White" FontSize="16">
+        <DataGrid x:Name="lstListings" Background="{StaticResource LightGray}" AlternatingRowBackground="{StaticResource darkRow}" RowBackground="{StaticResource lightRow}" IsReadOnly="true" Margin="10,50,10,10" AutoGenerateColumns="False" FontFamily="Trebuchet MS" Foreground="White" FontSize="16" ItemsSource="{Binding Mode=OneWay, IsAsync=True}" SelectionMode="Single" MouseDoubleClick="lstListings_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Country" Binding="{Binding country}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Website" Binding="{Binding url}"></DataGridTextColumn>
